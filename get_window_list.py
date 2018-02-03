@@ -1,5 +1,5 @@
+from collections import namedtuple
 import subprocess
-import re
 
 
 def get_window_list():
@@ -9,18 +9,16 @@ def get_window_list():
     Each window in the list has a list of attributes in the following order:
     <window ID> <desktop ID> <X>,<Y>,<W>,<H> <client machine> <window title>
     """
+    Window = namedtuple('Window', ['id', 'desktop',
+                                   'x', 'y', 'w', 'h',
+                                   'client', 'title'])
     proc = subprocess.run(['wmctrl', '-lG'], encoding='utf-8', stdout=subprocess.PIPE)
-    windstr = proc.stdout
-    windstr = re.sub(' +', " ", windstr)
-    windlist = windstr.split('\n')
-    if windlist[-1] == '':
-        windlist = windlist[:-1]
-    windowlist = []
-    for line in range(len(windlist)):
-        win = windlist[line].split(" ", 7)
-        windowlist.append(win)
-    return windowlist
+    windstr = proc.stdout.split('\n')[:-1]
+    windows = [Window(*line.split(maxsplit=7)) for line in windstr]
+    return windows
 
 
 if __name__ == "__main__":
-    print(*get_window_list(), sep='\n')
+    x = get_window_list()
+    for item in x:
+        print("Window id = {}\nWindow Title = {}\n\n".format(item.id, item.title))
