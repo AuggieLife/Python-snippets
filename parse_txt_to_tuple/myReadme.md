@@ -1,15 +1,3 @@
-Title: Parse a text file into a list of named tuples
-Date: 2018-03-10 17:07
-Modified: 2018-03-10 17:07
-Status: published
-Category: This site
-Tags: python
-Slug: first-post
-Series: r/learnpython
-Series_index: 1
-Author: Dale Appleby
-Summary: This was brought up on Reddit in LearnPython.  The question revolved around parsing a large text file that contained lines that represented an image.
-
 ### Parse a text file into a list of named tuples
 
 This was brought up on Reddit in LearnPython.  The original post can be found here at this [Reddit Link](https://redd.it/822956).
